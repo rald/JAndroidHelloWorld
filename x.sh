@@ -18,7 +18,7 @@ do
     JAVAFILES="$JAVAFILES $JAVAFILE"
 done
 
-javac -cp android-29.jar -d obj $JAVAFILES
+ecj -cp android-29.jar -d obj $JAVAFILES
 
 dx --dex --output=output/classes.dex obj
 
@@ -30,7 +30,7 @@ aapt package -f -m \
     -F output/HelloWorld.apk \
     output
 
-zip -u output/HelloWorld.apk output/classes.dex
+#zip -u output/HelloWorld.apk output/classes.dex
 
 zipalign -v 4 output/HelloWorld.apk output/HelloWorld-aligned.apk
 
