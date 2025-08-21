@@ -34,6 +34,6 @@ aapt package -f -m \
 
 zipalign -v 4 output/HelloWorld.apk output/HelloWorld-aligned.apk
 
-apksigner sign --ks android.jks --ks-key-alias android --ks-pass pass:android --key-pass pass:android output/HelloWorld-aligned.apk
+apksigner sign --ks android.keystore --ks-key-alias android --ks-pass pass:android --key-pass pass:android output/HelloWorld-aligned.apk
 
 cp output/HelloWorld-aligned.apk HelloWorld.apk
