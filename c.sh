@@ -1,2 +1,2 @@
-rm -rf gen obj output HelloWorld.apk
+rm -rf bin gen obj output HelloWorld.apk
 

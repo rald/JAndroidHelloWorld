@@ -1,7 +1,8 @@
 #!/bin/bash
 
-rm -rf obj gen output HelloWorld.apk
+rm -rf bin obj gen output HelloWorld.apk
 
+mkdir bin
 mkdir obj
 mkdir gen
 mkdir output
@@ -27,13 +28,11 @@ aapt package -f -m \
     -S res \
     -M AndroidManifest.xml \
     -I android-30.jar \
-    -F output/HelloWorld.apk \
+    -F bin/HelloWorld.apk \
     output
 
-#zip -u output/HelloWorld.apk output/classes.dex
+zipalign -v 4 bin/HelloWorld.apk bin/HelloWorld-aligned.apk
 
-zipalign -v 4 output/HelloWorld.apk output/HelloWorld-aligned.apk
+apksigner sign --ks android.keystore --ks-key-alias android --ks-pass pass:android --key-pass pass:android bin/HelloWorld-aligned.apk
 
-apksigner sign --ks android.keystore --ks-key-alias android --ks-pass pass:android --key-pass pass:android output/HelloWorld-aligned.apk
-
-cp output/HelloWorld-aligned.apk HelloWorld.apk
+cp bin/HelloWorld-aligned.apk HelloWorld.apk
