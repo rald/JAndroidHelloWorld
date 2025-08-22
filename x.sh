@@ -19,12 +19,12 @@ do
     JAVAFILES="$JAVAFILES $JAVAFILE"
 done
 
-ecj -cp android-30.jar -d obj $JAVAFILES
+javac -cp android-30.jar -d obj $JAVAFILES
 
-dx --dex --output=output/classes.dex obj
+d8 $(find obj -name '*.class') --lib android-30.jar --output output
 
 aapt package -f -m \
-		-J gen \
+	-J gen \
     -S res \
     -M AndroidManifest.xml \
     -I android-30.jar \
