@@ -15,7 +15,7 @@ aapt package -f -m \
 
 javac -cp android-30.jar -d obj $(find src -name '*.java')
 
-d8 $(find obj -name '*.class') --lib android-30.jar --output output
+d8 --lib android-30.jar --output output $(find obj -name '*.class')
 
 aapt package -f -m \
 	-J gen \
@@ -27,8 +27,6 @@ aapt package -f -m \
 
 zipalign -v 4 bin/HelloWorld.apk bin/HelloWorld-aligned.apk
 
-#apksigner sign --ks android.keystore --ks-key-alias android --ks-pass pass:android --key-pass pass:android bin/HelloWorld-aligned.apk
-
-jarsigner -storepass android -keypass android -keystore android.keystore bin/HelloWorld-aligned.apk android
+apksigner sign --ks android.keystore --ks-key-alias android --ks-pass pass:android --key-pass pass:android bin/HelloWorld-aligned.apk
 
 cp bin/HelloWorld-aligned.apk HelloWorld.apk
