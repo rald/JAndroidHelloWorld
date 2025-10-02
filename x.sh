@@ -18,12 +18,12 @@ javac -cp android-30.jar -d obj $(find src -name '*.java')
 d8 --lib android-30.jar --output output $(find obj -name '*.class')
 
 aapt package -f -m \
-	-J gen \
-    -S res \
-    -M AndroidManifest.xml \
-    -I android-30.jar \
-    -F bin/HelloWorld.apk \
-    output
+  -J gen \
+  -S res \
+  -M AndroidManifest.xml \
+  -I android-30.jar \
+  -F bin/HelloWorld.apk \
+  output
 
 zipalign -v 4 bin/HelloWorld.apk bin/HelloWorld-aligned.apk
 
